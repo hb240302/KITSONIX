@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  const data = JSON.parse(sessionStorage.getItem("PAYU_DATA"));
+
+  if (!data) {
+    document.body.innerHTML = "Invalid payment session";
+    throw new Error("Missing PayU data");
+  }
+
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = "https://secure.payu.in/_payment";
+
+  Object.keys(data).forEach(key => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = key;
+    input.value = data[key];
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  form.submit();
+</script>
+</body>
+</html>
