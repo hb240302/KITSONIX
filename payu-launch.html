@@ -2,12 +2,15 @@
 <html>
 <body>
 <script>
-  const data = JSON.parse(sessionStorage.getItem("PAYU_DATA"));
+  const params = new URLSearchParams(window.location.search);
+  const encoded = params.get("data");
 
-  if (!data) {
+  if (!encoded) {
     document.body.innerHTML = "Invalid payment session";
     throw new Error("Missing PayU data");
   }
+
+  const data = JSON.parse(decodeURIComponent(encoded));
 
   const form = document.createElement("form");
   form.method = "POST";
