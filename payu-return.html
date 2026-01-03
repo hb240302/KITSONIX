@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Processing Payment</title>
+</head>
+<body>
+  <p>Processing payment result, please wait…</p>
+
+  <script>
+    // Read PayU status
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+
+    // Redirect safely
+    setTimeout(() => {
+      if (status === 'success') {
+        window.location.replace('https://www.kitsonix.com/cart');
+      } else {
+        window.location.replace('https://www.kitsonix.com/confirm-cod');
+      }
+    }, 500);
+  </script>
+</body>
+</html>
